@@ -21,8 +21,7 @@ query_text: |-
   | stats
     min(@scnr.datetime) as firstTime,
     max(@scnr.datetime) as lastTime,
-    count() as eventCount,
-    no_function_with_this_name() as intentional_error
+    count() as eventCount
     by
     userIdentity.arn,
     eventSource,
