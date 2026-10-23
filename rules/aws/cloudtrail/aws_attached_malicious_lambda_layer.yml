@@ -14,7 +14,7 @@ description: |-
   * Lambda Layer being attached from unfamiliar users should be investigated. If known behavior is causing false positives, it can be exempted from the rule.
 severity: Medium
 query_text: |-
-  %ingest.source_type="aws:cloudtrail"
+  @scnr.source_type="aws:cloudtrail"
   eventSource="lambda.amazonaws.com"
   eventName="UpdateFunctionConfiguration*"
   userIdentity.type="IAMUser"
@@ -40,5 +40,5 @@ tests:
   - name: Test alert is triggered when Lambda layer attached to existing function
     now_timestamp: "2024-08-21T00:03:00.000Z"
     dataset_inline: |
-      {"timestamp":"2024-08-21T00:02:30.000Z","%ingest.source_type":"aws:cloudtrail","eventSource":"lambda.amazonaws.com","eventName":"UpdateFunctionConfiguration20150331v2","userIdentity":{"arn":"arn:aws:iam::123456789012:user/JohnDoe","type":"IAMUser"},"awsRegion":"us-west-2"}
+      {"timestamp":"2024-08-21T00:02:30.000Z","@scnr.source_type":"aws:cloudtrail","eventSource":"lambda.amazonaws.com","eventName":"UpdateFunctionConfiguration20150331v2","userIdentity":{"arn":"arn:aws:iam::123456789012:user/JohnDoe","type":"IAMUser"},"awsRegion":"us-west-2"}
     expected_detection_result: true
